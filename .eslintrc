@@ -1,0 +1,20 @@
+{
+  "env": {
+    "node": 1,
+    "browser": 1
+  },
+  "globals": {
+    "exampleGlobalVariable": true
+  },
+  "rules": {
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ]
+  },
+  "plugins": []
+}

@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "@model": "./model",
+        "@route": "./routes"
+      }
+    }]
+  ]
+}
