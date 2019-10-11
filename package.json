@@ -3,26 +3,34 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www --exec babel-node --presets babel-preset-env",
-    "dev": "nodemon ./bin/www --exec babel-node --presets babel-preset-env"
+    "pre-build": "rm -rf .build",
+    "only-build": "babel . --out-dir .build --ignore node_modules --copy-files",
+    "clean": "cd ./.build&&rm -rf package.json package-lock.json .vscode .git",
+    "build": "npm run pre-build&&npm run only-build&&npm run clean",
+    "start": "set NODE_ENV=production&&set PORT=80&&node ./.build/bin/www",
+    "dev": "set PORT=80&& nodemon --exec babel-node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.0.0",
     "ejs": "^2.6.2",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.4",
     "mongoose-unique-validator": "^2.0.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "url-join": "^4.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
     "babel-plugin-module-resolver": "^3.2.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-plugin-inline-dotenv": "^1.5.0",
     "nodemon": "^1.19.1"
   }
 }

@@ -7,6 +7,7 @@
     "exampleGlobalVariable": true
   },
   "rules": {
+    "object-property-newline": ["error"],
     "linebreak-style": [
       "error",
       "unix"
@@ -14,7 +15,12 @@
     "quotes": [
       "error",
       "single"
-    ]
+    ],
+    "max-len": ["error", {
+      "code": 80,
+      "ignoreComments": true,
+      "ignoreUrls": true
+    }]
   },
   "plugins": []
 }

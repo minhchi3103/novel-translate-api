@@ -59,3 +59,11 @@ typings/
 
 # next.js build output
 .next
+
+#key file
+*.key
+*.pub
+*.pem
+
+#babel build output dist
+.build/
