@@ -8,7 +8,8 @@
     "clean": "cd ./.build&&rm -rf package.json package-lock.json .vscode .git",
     "build": "npm run pre-build&&npm run only-build&&npm run clean",
     "start": "set NODE_ENV=production&&set PORT=80&&node ./.build/bin/www",
-    "dev": "set PORT=80&& nodemon --exec babel-node ./bin/www"
+    "dev": "set PORT=80&& nodemon --exec babel-node ./bin/www",
+    "eslint": "eslint ."
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -29,8 +30,9 @@
     "@babel/core": "^7.6.0",
     "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
-    "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-inline-dotenv": "^1.5.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^6.5.1",
     "nodemon": "^1.19.1"
   }
 }

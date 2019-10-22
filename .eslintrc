@@ -1,16 +1,21 @@
 {
+  "extends": [
+    "eslint:recommended"
+  ],
   "env": {
-    "node": 1,
-    "browser": 1
+    "node": true,
+    "browser": false,
+    "es6": true
   },
-  "globals": {
-    "exampleGlobalVariable": true
+  "parserOptions": {
+    "ecmaVersion": 8
   },
+  "globals": {},
   "rules": {
     "object-property-newline": ["error"],
     "linebreak-style": [
       "error",
-      "unix"
+      "windows"
     ],
     "quotes": [
       "error",
