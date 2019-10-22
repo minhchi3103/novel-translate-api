@@ -8,7 +8,11 @@ var translationSchema = mongoose.Schema({
       required: [true, 'userIdIsRequired']
     },
     text: String
-  }]
+  }],
+  position: {
+    type: mongoose.Schema.Types.Number,
+    default: 0
+  }
 })
 var chapterSchema = mongoose.Schema({
   name: {

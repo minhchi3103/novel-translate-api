@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Novel = require('@m/novel')
+var Novel = require('@m/novel');
 var User = require('@m/user');
 
 //create new novel
@@ -11,7 +11,7 @@ var User = require('@m/user');
 //  otherName: array of other name of the novel
 //  description: the novel'description
 //response: novel object after saving
-router.post('/', async function (req, res, next) {
+router.post('/', async function(req, res, next) {
   try {
     let userId = res.locals.decodedToken._id;
     let name = req.body.name;
@@ -42,15 +42,19 @@ router.post('/', async function (req, res, next) {
       return {
         pid: value._id,
         role: 'editor'
-      }
-    })
+      };
+    });
     let translatorParticipantList = translatorInformationList.map(value => {
       return {
         pid: value._id,
         role: 'translator'
-      }
-    })
-    let participant = [owner, ...editorParticipantList, ...translatorParticipantList];
+      };
+    });
+    let participant = [
+      owner,
+      ...editorParticipantList,
+      ...translatorParticipantList
+    ];
 
     let data = {
       name: name,
@@ -64,25 +68,28 @@ router.post('/', async function (req, res, next) {
     // find user who participate in novel and set novel status in user information
     let userNovelStatus = {
       novelId: saveNovel._id,
-      status: "waiting"
-    }
-    let queryUsers = User.updateMany({
-      '_id': {
-        '$in': participant.map(value => value.pid)
+      status: 'waiting'
+    };
+    User.updateMany(
+      {
+        _id: {
+          $in: participant.map(value => value.pid)
+        },
+        'novel.novelId': {
+          $ne: saveNovel._id
+        }
       },
-      'novel.novelId': {
-        '$ne': saveNovel._id
+      {
+        $addToSet: {
+          novel: userNovelStatus
+        }
       }
-    }, {
-      '$addToSet': {
-        'novel': userNovelStatus
-      }
-    }).exec();
+    ).exec();
     //return saved novel information
-    return res.json(saveNovel)
+    return res.json(saveNovel);
   } catch (error) {
-    if (error) return next(error)
+    if (error) return next(error);
   }
-})
+});
 
 module.exports = router;
