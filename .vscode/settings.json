@@ -3,7 +3,6 @@
   "files.autoSave": "off",
   "javascript.validate.enable": false,
   "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true,
   "javascript.format.enable": false,
   "files.exclude": {
     "**/.git": true,
@@ -14,5 +13,8 @@
     "node_modules": true
   },
   "prettier.jsxSingleQuote": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
