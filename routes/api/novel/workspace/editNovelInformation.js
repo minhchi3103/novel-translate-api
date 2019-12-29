@@ -17,10 +17,12 @@ router.post('/', async function(req, res, next) {
     let name = req.body.name;
     let otherName = req.body.otherName;
     let description = req.body.description;
+    let published = req.body.published;
 
     if (name) queryNovel.name = name;
     if (otherName) queryNovel.otherName = otherName;
     if (description) queryNovel.description = description;
+    if (published) queryNovel.published = published;
 
     let saveNovel = await queryNovel.save();
     return res.json(saveNovel);
