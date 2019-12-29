@@ -2,18 +2,20 @@ var mongoose = require('mongoose');
 
 var translationSchema = mongoose.Schema({
   source: String,
-  dest: [{
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: [true, 'userIdIsRequired']
-    },
-    text: String
-  }],
+  dest: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, 'userIdIsRequired']
+      },
+      text: String
+    }
+  ],
   position: {
     type: mongoose.Schema.Types.Number,
     default: 0
   }
-})
+});
 var chapterSchema = mongoose.Schema({
   name: {
     type: String,
@@ -27,6 +29,6 @@ var chapterSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId
   },
   content: [translationSchema]
-})
+});
 
 module.exports = mongoose.model('Chapter', chapterSchema);

@@ -10,7 +10,7 @@ var participantSchema = mongoose.Schema({
     enum: ['owner', 'editor', 'translator'],
     required: [true, 'roleIsRequired']
   }
-})
+});
 
 var chapterSchema = mongoose.Schema({
   name: {
@@ -19,17 +19,21 @@ var chapterSchema = mongoose.Schema({
   },
   position: {
     type: mongoose.Schema.Types.Number,
-    default: 0,
+    default: 0
   },
   deleted: {
     type: mongoose.Schema.Types.Boolean,
     default: false
   },
+  publishableRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PublishableChapter'
+  },
   chapterId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Chapter'
   }
-})
+});
 var volumeSchema = mongoose.Schema({
   name: {
     type: String,
@@ -37,20 +41,20 @@ var volumeSchema = mongoose.Schema({
   },
   position: {
     type: mongoose.Schema.Types.Number,
-    default: 0,
+    default: 0
   },
   deleted: {
     type: mongoose.Schema.Types.Boolean,
     default: false
   },
   chapter: [chapterSchema]
-})
+});
 var novelSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, 'nameIsRequired'],
     validate: {
-      validator: function (name) {
+      validator: function(name) {
         var re = /^[\w,.!?'" ]/;
         return re.test(name);
       },
@@ -62,9 +66,15 @@ var novelSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  otherName: [{
-    type: String
-  }],
+  published: {
+    type: Boolean,
+    default: false
+  },
+  otherName: [
+    {
+      type: String
+    }
+  ],
   description: {
     type: String,
     default: '...'
