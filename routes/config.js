@@ -60,6 +60,15 @@ var routeData = [
               ]
             ],
             middleware: ['ExistedChapterMiddleware']
+          },
+          {
+            routeFile: [
+              [
+                '/chapter/id/:chapterId/publish',
+                'api/novel/workspace/editAndPublishChapter'
+              ]
+            ],
+            middleware: ['NovelEditorOrOwnerMiddleware']
           }
         ]
       }

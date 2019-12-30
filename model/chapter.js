@@ -28,6 +28,10 @@ var chapterSchema = mongoose.Schema({
   volume: {
     type: mongoose.Schema.Types.ObjectId
   },
+  publishableRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PublishableChapter'
+  },
   content: [translationSchema]
 });
 

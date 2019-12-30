@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 
 // parse jwt token (if exist) and store in res.locals.user
-module.exports = async function (req, res, next) {
+module.exports = async function(req, res, next) {
   try {
     // Make sure middleware run only one time
     if (require('@h/mw')(__filename, req, next)) return;
@@ -17,11 +17,11 @@ module.exports = async function (req, res, next) {
     }
     let decodedToken = await jwt.verify(token, process.env.PUBLIC_KEY);
     res.locals.decodedToken = decodedToken;
-    next()
+    res.locals.role = decodedToken.role;
+    next();
   } catch (error) {
     // If having error, unset res.locals.decodedToken and call next()
     if (res.locals.decodedToken) res.locals.decodedToken = undefined;
     next();
   }
-
-}
+};
